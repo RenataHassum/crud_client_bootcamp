@@ -23,14 +23,24 @@ public class ClientService {
         return list.map(client -> new ClientDto(client));
     }
 
+    @Transactional(readOnly = true)
     public ClientDto findById(Long id) {
        Optional<Client> obj = repository.findById(id);
        Client entity = obj.get();
        return new ClientDto(entity);
     }
 
+    @Transactional
     public ClientDto insert(ClientDto dto) {
         Client entity = new Client();
+        copyDtoToEntity(dto, entity);
+        entity = repository.save(entity);
+        return new ClientDto(entity);
+    }
+
+    @Transactional
+    public ClientDto update(Long id, ClientDto dto) {
+        Client entity = repository.getOne(id);
         copyDtoToEntity(dto, entity);
         entity = repository.save(entity);
         return new ClientDto(entity);
@@ -43,5 +53,4 @@ public class ClientService {
         entity.setBirthDate(dto.getBirthDate());
         entity.setChildren(dto.getChildren());
     }
-
 }
