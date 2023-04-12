@@ -13,7 +13,8 @@ public class ClientDto implements Serializable {
     private Instant birthDate;
     private Integer children;
 
-    public ClientDto(){}
+    public ClientDto() {
+    }
 
     public ClientDto(Long id, String name, String cpf, Double income, Instant birthDate, Integer children) {
         this.id = id;
