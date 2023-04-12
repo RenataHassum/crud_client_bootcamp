@@ -53,4 +53,8 @@ public class ClientService {
         entity.setBirthDate(dto.getBirthDate());
         entity.setChildren(dto.getChildren());
     }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 }
