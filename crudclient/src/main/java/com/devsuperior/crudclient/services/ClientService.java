@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 public class ClientService {
 
@@ -19,5 +21,11 @@ public class ClientService {
     public Page<ClientDto> findAll(PageRequest pageRequest) {
         Page<Client> list = repository.findAll(pageRequest);
         return list.map(client -> new ClientDto(client));
+    }
+
+    public ClientDto findById(Long id) {
+       Optional<Client> obj = repository.findById(id);
+       Client entity = obj.get();
+       return new ClientDto(entity);
     }
 }
